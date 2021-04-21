@@ -101,11 +101,11 @@
                                     <template #content>
                                         <!-- Account Management -->
                                         <div class="block px-4 py-2 text-xs text-gray-400">
-                                            Manage Account
+                                            Gestisci il tuo account
                                         </div>
 
                                         <jet-dropdown-link :href="route('profile.show')">
-                                            Profile
+                                            Profilo utente
                                         </jet-dropdown-link>
                                         <jet-dropdown-link :href="route('tokens')">
                                             Gestione Token

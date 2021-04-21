@@ -149,10 +149,10 @@
                     cap:this.user.cap,
                     city: this.user.city,
                     prov: this.user.prov,
-                    photo: null,
+                    photo: this.user.photo,
                 }),
 
-                photoPreview: null,
+                photoPreview: true,
             }
         },
 
