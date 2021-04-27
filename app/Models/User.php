@@ -29,9 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail
     const ADMIN = "ADMIN";
     const NORMAL = "NORMAL USER";
 
-    protected $fillable = [
-        'lastname', 'name', 'email', 'password','address','city','cap','prov','phone','user_type_id','birth','natoa','agree'
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.

@@ -16,6 +16,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Role' => 'App\Policies\RolePolicy',
+        'App\Models\User' => 'App\Policies\UserPolicy',
     ];
 
     /**
@@ -30,6 +32,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-token', function (User $user,$tokenable_id) {
             return $user->id === $tokenable_id;
         });
+
+        Gate::define('manage-users', function ($user) {
+            return $user->is_admin();
+        });
+
+        
         
     }
 }

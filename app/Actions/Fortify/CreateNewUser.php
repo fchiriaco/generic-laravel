@@ -8,6 +8,7 @@ use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -32,7 +33,7 @@ class CreateNewUser implements CreatesNewUsers
             'prov' => ['nullable', 'string', 'max:4'],
             'cap' => ['nullable', 'max:5'],
             'phone' => ['nullable', 'string', 'max:50'],
-            'birth' => ['required','date','after:1930-01-01','before:2007-01-01'],
+            'birth' => ['nullable','date','after:1930-01-01','before:2008-01-01'],
             'natoa' => ['nullable', 'string', 'max:255'],
             'agree' => ['accepted','boolean'],
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',

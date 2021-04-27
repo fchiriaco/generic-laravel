@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -28,6 +30,7 @@ Route::get('/', function () {
         'appname' => config('app.name')
     ]);
 });
+
 
 
 Route::get('/email/verify', function () {
@@ -64,6 +67,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
          return json_encode(Auth::user()->personalTokens);
          // return $request->user()->createToken('test2');
     });
+
+
+    Route::get('userslist',[UserController::class,'index2'] );
+    Route::get('userssearch/{txtsearch?}',[UserController::class,'search'] );
+
+    Route::resource('users', UserController::class);
+
+    Route::resource('roles', RoleController::class);
 
 });
 
