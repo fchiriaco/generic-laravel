@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRequestRole;
+use App\Http\Requests\UpdateRequestRole;
+use Illuminate\Support\Facades\Gate;
+use App\Models\User;
 use App\Models\Role;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum', 'verified']);
+        $this->authorizeResource(Role::class,'role');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,41 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        if(Gate::allows('manage-users'))
+        {
+            $roles = Role::orderBy('rolename')->paginate(config('app.paginazione'));
+            
+            
+            return Inertia::render('roles/index',['roles'=>$roles]);
+        }
+        else
+            Abort('403');
+    }
+
+
+    public function index2()
+    {
+        if(Gate::allows('manage-users'))
+        {
+            $roles = User::orderBy('rolename')->paginate(config('app.paginazione'));
+            
+            return $roles;
+        }
+        else
+            Abort('403');
+    }
+
+
+    public function search($txtsearch = '')
+    {
+        if(Gate::allows('manage-users'))
+        {
+            $roles = Role::where('rolename','like',$txtsearch . '%')->orderBy('rolename')->paginate(config('app.paginazione'));
+            
+            return $roles;
+        }
+        else
+            Abort('403');
     }
 
     /**
@@ -24,7 +70,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -33,9 +79,12 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequestRole $request)
     {
-        //
+        $role = new Role;
+        $role->rolename = $request['rolename'];
+        $role->save();
+        return "Dati salvati correttamente";
     }
 
     /**
@@ -67,9 +116,11 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(UpdateRequestRole $request, Role $role)
     {
-        //
+        $role->rolename = $request->rolename;
+        $role->save();
+        return "Dati salvati correttamente";
     }
 
     /**
@@ -80,6 +131,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        Role::destroy($role['id']);
+        return "Record eliminato correttamente!";
     }
 }

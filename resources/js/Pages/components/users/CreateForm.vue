@@ -186,7 +186,7 @@
                                             .catch ((e) => { 
                                                     this.salvataggioko = true;
                                                     this.salvataggiook = false;
-                                                    console.log(e);
+                                                    
                                                     
                                                 }); 
                                         }

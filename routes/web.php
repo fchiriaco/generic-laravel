@@ -72,6 +72,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('userslist',[UserController::class,'index2'] );
     Route::get('userssearch/{txtsearch?}',[UserController::class,'search'] );
 
+    Route::get('roleslist',[RoleController::class,'index2']);
+    Route::get('rolessearch/{txtsearch?}',[RoleController::class,'search']) ;
+
     Route::resource('users', UserController::class);
 
     Route::resource('roles', RoleController::class);
