@@ -42,7 +42,7 @@ class RoleController extends Controller
     {
         if(Gate::allows('manage-users'))
         {
-            $roles = User::orderBy('rolename')->paginate(config('app.paginazione'));
+            $roles = Role::orderBy('rolename')->paginate(config('app.paginazione'));
             
             return $roles;
         }
@@ -82,7 +82,7 @@ class RoleController extends Controller
     public function store(StoreRequestRole $request)
     {
         $role = new Role;
-        $role->rolename = $request['rolename'];
+        $role->rolename = e($request['rolename']);
         $role->save();
         return "Dati salvati correttamente";
     }
@@ -118,7 +118,7 @@ class RoleController extends Controller
      */
     public function update(UpdateRequestRole $request, Role $role)
     {
-        $role->rolename = $request->rolename;
+        $role->rolename = e($request->rolename);
         $role->save();
         return "Dati salvati correttamente";
     }

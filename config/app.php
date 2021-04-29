@@ -123,6 +123,7 @@ return [
 
     'cipher' => 'AES-256-CBC',
     'paginazione' => env('PAGINAZIONE',10),
+    'mission' => env('MISSION',"MISSION DELL'APP DA MODIFICARE IN .env"),
 
     /*
     |--------------------------------------------------------------------------

@@ -83,17 +83,17 @@ class UserController extends Controller
     {
         
         $user = new User;
-        $user->lastname = $request['lastname'];
-        $user->name = $request['name'];
-        $user->cfiscale =  $request['cfiscale'];
-        $user->email = $request['email'];
-        $user->address = $request["address"];
-        $user->cap = $request["cap"];
-        $user->city = $request["city"];
-        $user->prov = $request["prov"];
-        $user->phone = $request["phone"];
+        $user->lastname = e($request['lastname']);
+        $user->name = e($request['name']);
+        $user->cfiscale =  e($request['cfiscale']);
+        $user->email = e($request['email']);
+        $user->address = e($request["address"]);
+        $user->cap = e($request["cap"]);
+        $user->city = e($request["city"]);
+        $user->prov = e($request["prov"]);
+        $user->phone = e($request["phone"]);
         $user->birth = $request["birth"];
-        $user->natoa = $request["natoa"];
+        $user->natoa = e($request["natoa"]);
         $user->agree = 1;
         $user->email_verified_at =  date("Y-m-d H:i:s");
         $user->password =  Hash::make($request['password']);
@@ -135,17 +135,17 @@ class UserController extends Controller
      */
     public function update(UpdateRequestUser $request, User $user)
     {
-        $user->lastname = $request->lastname;
-        $user->name = $request->name;
-        $user->email = $request["email"];
-        $user->address = $request["address"];
-        $user->cap = $request["cap"];
-        $user->city = $request["city"];
-        $user->prov = $request["prov"];
-        $user->phone = $request["phone"];
+        $user->lastname = e($request->lastname);
+        $user->name = e($request->name);
+        $user->email = e($request["email"]);
+        $user->address = e($request["address"]);
+        $user->cap = e($request["cap"]);
+        $user->city = e($request["city"]);
+        $user->prov = e($request["prov"]);
+        $user->phone = e($request["phone"]);
         $user->birth = $request["birth"];
-        $user->natoa = $request["natoa"];
-        $user->cfiscale = $request["cfiscale"];
+        $user->natoa = e($request["natoa"]);
+        $user->cfiscale = e($request["cfiscale"]);
         $user->email_verified_at = date("Y-m-d H:i:s");
         if(isset($request['password']) && !is_null($request["password"]) && !empty($request["password"]))
             $user->password = Hash::make($request['password']);

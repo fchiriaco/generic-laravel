@@ -41,18 +41,18 @@ class CreateNewUser implements CreatesNewUsers
 
         $role = Role::where('rolename',User::NORMAL)->first();
         $user =  User::create([
-            'lastname' => $input['lastname'],
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'cfiscale' => $input['cfiscale'],
+            'lastname' => e($input['lastname']),
+            'name' => e($input['name']),
+            'email' => e($input['email']),
+            'cfiscale' => e($input['cfiscale']),
             'password' => Hash::make($input['password']),
-            'address' => $input['address'],
-            'cap' => $input['cap'],
-            'city' => $input['city'],
-            'prov' => $input['prov'],
-            'phone' => $input['phone'],
+            'address' => e($input['address']),
+            'cap' => e($input['cap']),
+            'city' => e($input['city']),
+            'prov' => e($input['prov']),
+            'phone' => e($input['phone']),
             'birth' => $input['birth'],
-            'natoa' => $input['natoa'],
+            'natoa' => e($input['natoa']),
             'agree' => $input['agree'],
 
         ]);
